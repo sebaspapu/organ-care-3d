@@ -9,6 +9,8 @@ import Controls from "./controls/Controls";
 import Title from "./texts/Title";
 import TitleAuxModel2 from "./texts/TitleAuxModel2";
 
+import Gel from './models-3d/Gel'
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Sky, Cloud } from '@react-three/drei';
@@ -109,6 +111,54 @@ export default function Conjuntivitis() {
           </div>
         </div>
         <div className="sintomas-footer-conjunti"></div>
+
+        {/* SECCIÓN: TRATAMIENTOS */}
+      <div className="tratamientos-section-conjunti">
+        <div className="tratamientos-header">
+          <h2>TRATAMIENTOS</h2>
+        </div>
+
+        <div className="tratamientos-container-conjunti">
+          <div className="tratamiento-card-conjunti">
+            <p className="tratamiento-text-conjunti">
+              Como parte del tratamiento de la conjuntivitis, el 
+              gel oftálmico se utiliza para aliviar síntomas como 
+              ardor, picazón y resequedad ocular. Su aplicación 
+              complementa otros tratamientos según el tipo de conjuntivitis, 
+              proporcionando lubricación prolongada y mejorando el 
+              confort del paciente durante la recuperación.
+            </p>
+          </div>
+
+          <div className="sintoma-card-conjunti" style={{ position: 'relative', height: '400px' }}>
+            
+            <Canvas
+              shadows
+              camera={{ position: [2, 2, 5], fov: 50 }}
+              style={{ background: "#FFFFFF" }}
+            >
+              <Title title={"GEL OFTALMOLOGICO"} />
+              <LightModel2/>
+              <Gel ref={modelRef} />
+              <OrbitControls />
+              
+
+              {/* Piso de la escena */}
+              <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.5, 0]}> 
+                  <planeGeometry args={[20, 20]} />
+                  <meshStandardMaterial color="cyan" />
+                </mesh>
+            </Canvas>
+            <div className="tratamiento-nota-conjunti">
+                <Canvas>
+                  <TitleAuxModel2 title={"💡 Haz clic en el modelo para interactuar. Usa las teclas ← y → para moverlo."} />
+                </Canvas>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div className="tratamientos-footer-conjunti"></div>
+
       </div>
     );
   }

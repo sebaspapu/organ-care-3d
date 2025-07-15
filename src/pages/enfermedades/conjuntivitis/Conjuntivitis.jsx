@@ -10,20 +10,30 @@ import Title from "./texts/Title";
 import TitleAuxModel2 from "./texts/TitleAuxModel2";
 
 import Gel from './models-3d/Gel'
+import LightModel3 from './lights/LightsModel3';
+import Environment from './stage/EnvironmentModel3'
+import SparklesModel3 from './stage/SparklesModel3';
+import ControlsModel3 from './controls/ControlModel3';
+import Text3DGel from './texts/treatments-3D2D/3DTreatment'
+import Text2DGel from './texts/treatments-3D2D/2DTreatment';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Sky, Cloud } from '@react-three/drei';
+import { Html } from '@react-three/drei';
 
 
-
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function Conjuntivitis() {
   const modelRef = useRef();
   const zoomContainerRef = useRef();
-    return (
-      <div className="conjuntivitis-container">
+  const modelGelRef = useRef();
+  // Estado para pasar el handler de doble clic
+  const [handleDoubleClick, setHandleDoubleClick] = useState(null);
+
+  return (
+    <div className="conjuntivitis-container">
         <h1 className="enfermedad-title">CONJUNTIVITIS</h1>
         
         <div className="info-container">
@@ -134,14 +144,18 @@ export default function Conjuntivitis() {
             
             <Canvas
               shadows
-              camera={{ position: [2, 2, 5], fov: 50 }}
+              camera={{ position: [0, 1.5, 6], fov: 50 }}
               style={{ background: "#FFFFFF" }}
             >
+              <LightModel3/>
+              <Environment/>
+              <SparklesModel3/>
               <Title title={"GEL OFTALMOLOGICO"} />
-              <LightModel2/>
-              <Gel ref={modelRef} />
+              <Gel ref={modelGelRef} scale={4} onDoubleClick={handleDoubleClick} />
+              <ControlsModel3 targetRef={modelGelRef} setHandleDoubleClick={setHandleDoubleClick} />
               <OrbitControls />
-              
+              <Text3DGel />
+              <Text2DGel />
 
               {/* Piso de la escena */}
               <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.5, 0]}> 
@@ -151,7 +165,7 @@ export default function Conjuntivitis() {
             </Canvas>
             <div className="tratamiento-nota-conjunti">
                 <Canvas>
-                  <TitleAuxModel2 title={"💡 Haz clic en el modelo para interactuar. Usa las teclas ← y → para moverlo."} />
+                  <TitleAuxModel2 title={"💡 Haz doble clic en el modelo para interactuar. Pulsa ℹ️ para ver información."} />
                 </Canvas>
               </div>
           </div>

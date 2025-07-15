@@ -1,21 +1,30 @@
-import React, { useRef } from 'react'
+import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei';
 
-const Eye = (props) => {
+const Gel = forwardRef(({ onDoubleClick, scale = 4, ...rest }, ref) => {
     const { nodes, materials } = useGLTF(
         "models-3d/conjuntivitis/gel-model-3d.glb"
     );
-    const eyeRef = useRef();
+    const gelRef = useRef();
+
+    useImperativeHandle(ref, () => gelRef.current);
 
     useFrame(() => {
-        if (eyeRef.current) {
-            eyeRef.current.rotation.y += 0.005;
+        if (gelRef.current) {
+            gelRef.current.rotation.y += 0.005;
         }
-        });
+    });
 
     return (
-        <group {...props} dispose={null} scale={4} ref={eyeRef} position={[0, 0, 0]}>
+        <group
+            ref={gelRef}
+            dispose={null}
+            scale={scale}
+            position={[0, 0, 0]}
+            onDoubleClick={onDoubleClick}
+            {...rest}
+        >
             <mesh
                 castShadow
                 receiveShadow
@@ -24,8 +33,8 @@ const Eye = (props) => {
             />
         </group>
     );
-};
+});
   
-export default Eye;
+export default Gel;
 
 useGLTF.preload("models-3d/conjuntivitis/gel-model-3d.glb");

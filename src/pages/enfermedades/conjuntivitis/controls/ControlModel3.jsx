@@ -1,0 +1,129 @@
+import { useFrame, useThree } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
+import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
+
+const ControlsModel3 = ({ targetRef, setHandleDoubleClick, setHandleClick }) => {
+    const { camera } = useThree();
+    const lightRef = useRef();
+    const [infoVisible, setInfoVisible] = useState(false);
+    const [vibrating, setVibrating] = useState(false);
+    const [vibrationStart, setVibrationStart] = useState(0);
+    const [isBlue, setIsBlue] = useState(false);
+    const originalColorRef = useRef(null);
+
+    // Handler de doble clic para vibración
+    useEffect(() => {
+      const handleDoubleClick = () => {
+        setVibrating(true);
+        setVibrationStart(performance.now() / 1000);
+      };
+      if (setHandleDoubleClick) setHandleDoubleClick(() => handleDoubleClick);
+    }, [setHandleDoubleClick]);
+
+    // Handler de clic simple para cambiar color
+    useEffect(() => {
+      const handleClick = () => {
+        setIsBlue((prev) => !prev);
+      };
+      if (setHandleClick) setHandleClick(() => handleClick);
+    }, [setHandleClick]);
+
+    // Guarda el color original al montar
+    useEffect(() => {
+      if (!targetRef.current) return;
+      const mesh = targetRef.current.children.find(child => child.isMesh);
+      if (mesh && mesh.material && !originalColorRef.current) {
+        originalColorRef.current = mesh.material.color.clone();
+      }
+    }, [targetRef]);
+
+    // Cambia el color del material del gel
+    useEffect(() => {
+      if (!targetRef.current) return;
+      const mesh = targetRef.current.children.find(child => child.isMesh);
+      if (mesh && mesh.material) {
+        if (isBlue) {
+          mesh.material.color = new THREE.Color('#0077ff');
+        } else if (originalColorRef.current) {
+          mesh.material.color.copy(originalColorRef.current);
+        }
+        mesh.material.needsUpdate = true;
+      }
+    }, [isBlue, targetRef]);
+
+    // Animación principal y vibración
+    useFrame(() => {
+      if (!targetRef.current) return;
+      const t = performance.now() / 1000;
+      if (vibrating) {
+        const elapsed = t - vibrationStart;
+        if (elapsed < 2) {
+          const offset = Math.sin(t * 50) * 0.01;
+          targetRef.current.rotation.z = offset;
+        } else {
+          setVibrating(false);
+          targetRef.current.rotation.z = 0;
+        }
+      }
+      // Pulso vertical simple
+      const pulse = 0.98 + 0.02 * Math.sin(t * 3);
+      targetRef.current.scale.set(4, pulse * 4, 4); // Mantén la escala base en 4
+    });
+
+    // Tecla "i" para mostrar información y flechas para rotar
+    useEffect(() => {
+      const handleKeyDown = (e) => {
+        if (e.key.toLowerCase() === 'i') {
+          setInfoVisible((prev) => !prev);
+        }
+        if (!targetRef.current) return;
+        if (e.key === 'ArrowLeft') {
+          targetRef.current.rotation.y -= 0.2;
+        }
+        if (e.key === 'ArrowRight') {
+          targetRef.current.rotation.y += 0.2;
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [targetRef]);
+
+    return (
+      <>
+        {/* Luz pulsante */}
+        <pointLight
+          ref={lightRef}
+          position={[0, 0, 1.5]}
+          color="red"
+          intensity={0.5}
+          distance={2}
+        />
+
+        {/* Información técnica como HTML */}
+        {infoVisible && (
+          <Html position={[-1.5, 0, 1]} center style={{ pointerEvents: 'none' }}>
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.85)',
+              padding: '10px 15px',
+              borderRadius: '8px',
+              fontSize: '14px',
+              color: '#111',
+              minWidth: '160px',
+              textAlign: 'center',
+              boxShadow: '0 0 40px rgba(0,0,0,0.3)'
+            }}>
+              <strong>Gel Drops o Siccafluid :</strong><br />
+              Útiles para aliviar la irritación y la sequedad causada por la conjuntivitis.<br/>
+              <span style={{fontSize: '12px', color: '#0077ff'}}>
+                💡 Hacer clic para cambiar el color y usar 
+                las teclas ← y → para rotar el modelo.
+              </span>
+            </div>
+          </Html>
+        )}
+      </>
+    );
+};
+
+export default ControlsModel3;

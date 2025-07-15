@@ -2,7 +2,7 @@ import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
-const Gel = forwardRef(({ onDoubleClick, scale = 4, ...rest }, ref) => {
+const Gel = forwardRef(({ onDoubleClick, onClick, scale = 4, ...rest }, ref) => {
     const { nodes, materials } = useGLTF(
         "models-3d/conjuntivitis/gel-model-3d.glb"
     );
@@ -22,7 +22,6 @@ const Gel = forwardRef(({ onDoubleClick, scale = 4, ...rest }, ref) => {
             dispose={null}
             scale={scale}
             position={[0, 0, 0]}
-            onDoubleClick={onDoubleClick}
             {...rest}
         >
             <mesh
@@ -30,6 +29,8 @@ const Gel = forwardRef(({ onDoubleClick, scale = 4, ...rest }, ref) => {
                 receiveShadow
                 geometry={nodes.OphthalmicGel.geometry}
                 material={materials.OphthalmicGelMaterial}
+                onClick={onClick}
+                onDoubleClick={onDoubleClick}
             />
         </group>
     );

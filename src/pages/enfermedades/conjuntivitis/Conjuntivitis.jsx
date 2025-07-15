@@ -29,8 +29,9 @@ export default function Conjuntivitis() {
   const modelRef = useRef();
   const zoomContainerRef = useRef();
   const modelGelRef = useRef();
-  // Estado para pasar el handler de doble clic
+  // Estado para pasar los handlers de click y doble click
   const [handleDoubleClick, setHandleDoubleClick] = useState(null);
+  const [handleClick, setHandleClick] = useState(null);
 
   return (
     <div className="conjuntivitis-container">
@@ -151,8 +152,8 @@ export default function Conjuntivitis() {
               <Environment/>
               <SparklesModel3/>
               <Title title={"GEL OFTALMOLOGICO"} />
-              <Gel ref={modelGelRef} scale={4} onDoubleClick={handleDoubleClick} />
-              <ControlsModel3 targetRef={modelGelRef} setHandleDoubleClick={setHandleDoubleClick} />
+              <Gel ref={modelGelRef} scale={4} onDoubleClick={handleDoubleClick} onClick={handleClick} />
+              <ControlsModel3 targetRef={modelGelRef} setHandleDoubleClick={setHandleDoubleClick} setHandleClick={setHandleClick} />
               <OrbitControls />
               <Text3DGel />
               <Text2DGel />

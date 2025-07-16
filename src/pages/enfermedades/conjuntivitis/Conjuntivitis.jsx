@@ -17,6 +17,8 @@ import ControlsModel3 from './controls/ControlModel3';
 import Text3DGel from './texts/treatments-3D2D/3DTreatment'
 import Text2DGel from './texts/treatments-3D2D/2DTreatment';
 
+import SoapDish from './models-3d/SoapDish'
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Sky, Cloud } from '@react-three/drei';
@@ -29,6 +31,7 @@ export default function Conjuntivitis() {
   const modelRef = useRef();
   const zoomContainerRef = useRef();
   const modelGelRef = useRef();
+  const SoapDishRef = useRef()
   // Estado para pasar los handlers de click y doble click
   const [handleDoubleClick, setHandleDoubleClick] = useState(null);
   const [handleClick, setHandleClick] = useState(null);
@@ -172,7 +175,51 @@ export default function Conjuntivitis() {
           </div>
         </div>
       </div>
-      <div className="tratamientos-footer-conjunti"></div>
+
+        {/* SECCIÓN: PREVENCION */}
+      <div className="prevenciones-section-conjunti">
+        <div className="sintomas-header-conjunti">
+            <h2 className="sintomas-title-conjunti">PREVENCIÓN</h2>
+          </div>
+
+        <div className="prevenciones-container-conjunti">
+          <div className="prevencion-card-conjunti">
+            <p className="prevencion-text-conjunti">
+              Para la prevención de la conjuntivitis, es fundamental mantener una adecuada higiene ocular. 
+              El uso regular de jabones específicos para el área de los párpados, ayuda a eliminar impurezas, restos de maquillaje y secreciones que pueden favorecer 
+              infecciones. Esta rutina de limpieza reduce el riesgo de contagio y mantiene los ojos limpios 
+              y saludables, especialmente en ambientes propensos a irritaciones o exposición a agentes externos.
+            </p>
+          </div>
+
+          <div className="sintoma-card-conjunti" style={{ position: 'relative', height: '400px' }}>
+            
+            <Canvas
+              shadows
+              camera={{ position: [0, 1.5, 6], fov: 50 }}
+              style={{ background: "#FFFFFF" }}
+            >
+              <Title title={"JABONERA"} />
+              <LightModel2/>
+              <SoapDish ref={SoapDishRef} scale={10} onDoubleClick={handleDoubleClick} onClick={handleClick} />
+              <OrbitControls />
+              
+
+              {/* Piso de la escena */}
+              <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.5, 0]}> 
+                  <planeGeometry args={[20, 20]} />
+                  <meshStandardMaterial color="cyan" />
+                </mesh>
+            </Canvas>
+            <div className="prevencion-nota-conjunti">
+                <Canvas>
+                  <TitleAuxModel2 title={"💡 Haz clic en el modelo para interactuar. Usa las teclas ← y → para moverlo."} />
+                </Canvas>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div className="prevenciones-footer-conjunti"></div>
 
       </div>
     );

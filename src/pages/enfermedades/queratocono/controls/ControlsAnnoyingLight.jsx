@@ -8,7 +8,7 @@ const Controls = ({ targetRef }) => {
   const { scene } = useThree();
   const [showTitle, setShowTitle] = useState(false);
 
-  // Fondo inicial
+  // Fondo
   useEffect(() => {
     const loader = new TextureLoader();
     loader.load("/background/luz.jpg", (texture) => {

@@ -22,6 +22,8 @@ import EnvironmentPrevention from './stage/EnvironmentModel4'
 import StagingModel4 from './stage/StagingModel4'
 import LightModel4 from './lights/LightsModel4'
 import ControlModel4 from './controls/ControlModel4';
+import Text3DSoapDish from './texts/treatments-3D2D/3DTreatmentModel4'
+import Text2DSoapDish from './texts/treatments-3D2D/2DTreatmentModel4';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -30,6 +32,7 @@ import { Html } from '@react-three/drei';
 
 
 import { useRef, useState, useEffect } from 'react';
+import Video3DModel4 from './video/Video3DModel4';
 
 export default function Conjuntivitis() {
   const modelRef = useRef();
@@ -41,6 +44,18 @@ export default function Conjuntivitis() {
   const [handleClick, setHandleClick] = useState(null);
   const [handleDoubleClick2, setHandleDoubleClick2] = useState(null);
   const [handleClick2, setHandleClick2] = useState(null);
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoKey, setVideoKey] = useState(0);
+
+  const handleToggleVideo = () => {
+    if (showVideo) {
+      // Si lo vas a ocultar, incrementa la key para forzar remount
+      setShowVideo(false);
+      setVideoKey((k) => k + 1);
+    } else {
+      setShowVideo(true);
+    }
+  };
 
   return (
     <div className="conjuntivitis-container">
@@ -238,6 +253,31 @@ export default function Conjuntivitis() {
               <ControlModel4 targetRef={SoapDishRef} setHandleDoubleClick={setHandleDoubleClick2} />
 
               <OrbitControls />
+
+              <Text3DSoapDish />
+              <Text2DSoapDish />
+
+              {/* Botón HTML 3D */}
+                <Html position={[-4.5, 3.5, -10]} center>
+                  <button
+                    style={{
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                      borderRadius: "8px",
+                      border: "2px solid #0077ff",
+                      background: "#fff",
+                      color: "#0077ff",
+                      cursor: "pointer",
+                      fontWeight: "bold"
+                    }}
+                    onClick={handleToggleVideo}
+                  >
+                    {showVideo ? "Ocultar Video 3D" : "Ver Video 3D"}
+                  </button>
+                </Html>
+
+                {/* Renderiza el video si showVideo es true, usando la key para forzar remount */}
+                {showVideo && <Video3DModel4 key={videoKey} />}
               
 
               {/* Piso de la escena */}

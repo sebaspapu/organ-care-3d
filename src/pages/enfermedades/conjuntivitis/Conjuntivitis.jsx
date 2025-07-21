@@ -18,6 +18,10 @@ import Text3DGel from './texts/treatments-3D2D/3DTreatment'
 import Text2DGel from './texts/treatments-3D2D/2DTreatment';
 
 import SoapDish from './models-3d/SoapDish'
+import EnvironmentPrevention from './stage/EnvironmentModel4'
+import StagingModel4 from './stage/StagingModel4'
+import LightModel4 from './lights/LightsModel4'
+import ControlModel4 from './controls/ControlModel4';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -35,6 +39,8 @@ export default function Conjuntivitis() {
   // Estado para pasar los handlers de click y doble click
   const [handleDoubleClick, setHandleDoubleClick] = useState(null);
   const [handleClick, setHandleClick] = useState(null);
+  const [handleDoubleClick2, setHandleDoubleClick2] = useState(null);
+  const [handleClick2, setHandleClick2] = useState(null);
 
   return (
     <div className="conjuntivitis-container">
@@ -169,7 +175,31 @@ export default function Conjuntivitis() {
             </Canvas>
             <div className="tratamiento-nota-conjunti">
                 <Canvas>
-                  <TitleAuxModel2 title={"💡 Haz doble clic en el modelo para interactuar. Pulsa ℹ️ para ver información."} />
+                  <TitleAuxModel2 title={
+                    <>
+                    💡Haz clic en el modelo cambiar de color. Usa la tecla .
+                     {""}
+                       <span
+                         style={{
+                           display: "inline-block",
+                           backgroundColor: "black",     // Fondo negro
+                           color: "#add8e6",              // Letra azul claro (puedes usar "white" si prefieres)
+                           borderRadius: "4px",          // Esquinas levemente redondeadas (usa 0 para cuadrado puro)
+                           width: "28px",
+                           height: "28px",
+                           fontSize: "16px",
+                           fontWeight: "bold",
+                           textAlign: "center",
+                           lineHeight: "28px",           // Centrado vertical
+                           border: "2px solid black",    // Borde negro
+                           margin: "0 4px",              // Espacio lateral
+                         }}
+                       >
+                         i
+                       </span>
+                     {" "}
+                    para información.
+                   </>} />
                 </Canvas>
               </div>
           </div>
@@ -199,9 +229,14 @@ export default function Conjuntivitis() {
               camera={{ position: [0, 1.5, 6], fov: 50 }}
               style={{ background: "#FFFFFF" }}
             >
+              <EnvironmentPrevention/>
+              <StagingModel4/>
+              <LightModel4/>
+              
               <Title title={"JABONERA"} />
-              <LightModel2/>
-              <SoapDish ref={SoapDishRef} scale={10} onDoubleClick={handleDoubleClick} onClick={handleClick} />
+              <SoapDish ref={SoapDishRef} scale={10} onDoubleClick={handleDoubleClick2} />
+              <ControlModel4 targetRef={SoapDishRef} setHandleDoubleClick={setHandleDoubleClick2} />
+
               <OrbitControls />
               
 
@@ -211,9 +246,35 @@ export default function Conjuntivitis() {
                   <meshStandardMaterial color="cyan" />
                 </mesh>
             </Canvas>
+            
             <div className="prevencion-nota-conjunti">
+            
                 <Canvas>
-                  <TitleAuxModel2 title={"💡 Haz clic en el modelo para interactuar. Usa las teclas ← y → para moverlo."} />
+                  <TitleAuxModel2 title={
+                    <>
+                     💡Haz clic en el modelo para hacerlo vibrar. Usa la tecla .
+                      {""}
+                        <span
+                          style={{
+                            display: "inline-block",
+                            backgroundColor: "black",     // Fondo negro
+                            color: "#add8e6",              // Letra azul claro (puedes usar "white" si prefieres)
+                            borderRadius: "4px",          // Esquinas levemente redondeadas (usa 0 para cuadrado puro)
+                            width: "28px",
+                            height: "28px",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            textAlign: "center",
+                            lineHeight: "28px",           // Centrado vertical
+                            border: "2px solid black",    // Borde negro
+                            margin: "0 4px",              // Espacio lateral
+                          }}
+                        >
+                          R
+                        </span>
+                      {" "}
+                      para reiniciar.
+                    </>} />
                 </Canvas>
               </div>
           </div>

@@ -28,7 +28,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="queratocono" element={<Queratocono />} />
         <Route path="conjuntivitis" element={<Conjuntivitis />} />
         <Route path="glaucoma" element={<Glaucoma />} />
-        <Route path="cataratas" element={<Cataratas />} />
+        {/*<Route path="cataratas" element={<Cataratas />} />*/}
         <Route path="quiz" element={<Quiz />} />
         <Route path="corazon" element={<Heart />}>
           <Route path="presion-alta" element={<HighBloodPressure />} />

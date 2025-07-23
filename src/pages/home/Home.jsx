@@ -117,7 +117,7 @@ const Home = () => {
             </NavLink>
           </div>
 
-          <div className="disease-card">
+          {/*<div className="disease-card">
             <div className="disease-icon">
               <img src={oceye} alt="Enfermedad 4" />
               <div className="disease-icon-drops"></div>
@@ -127,6 +127,7 @@ const Home = () => {
               <button className="disease-button">¡Ir aquí!</button>
             </NavLink>
           </div>
+          */}
         </div>
       </div>
 
@@ -185,6 +186,7 @@ const Home = () => {
               sebastian.bolanos@correounivalle.edu.co
             </p>
           </div>
+          {/* 
           <div className="card-about-us">
             <h2>Johan Riveros</h2>
             <p>Estudiante de la Universidad del Valle</p>
@@ -192,6 +194,7 @@ const Home = () => {
               johan.riveros@correounivalle.edu.co
             </p>
           </div>
+          */}
         </div>
         </div>
       </section>

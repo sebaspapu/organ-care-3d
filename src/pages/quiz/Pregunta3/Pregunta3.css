@@ -1,0 +1,50 @@
+.pregunta3 {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.sintomas-drag {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.sintoma {
+  background-color: #d0ebff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: grab;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-enfermedades {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.drop-zone {
+  background-color: #f8f9fa;
+  padding: 12px 18px;
+  border: 2px dashed #aaa;
+  border-radius: 8px;
+  min-height: 40px;
+}
+
+.cuadro-sintoma {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.btn-confirmar {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

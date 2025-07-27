@@ -1,0 +1,27 @@
+{
+  "name": "organcare3d-api",
+  "version": "1.0.0",
+  "description": "API backend para OrganCare3D con MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --experimental-fetch quiz-progress.js",
+    "start": "node quiz-progress.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^5.1.0",
+    "mongodb": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "mongodb",
+    "api",
+    "quiz",
+    "organcare3d"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT"
+}

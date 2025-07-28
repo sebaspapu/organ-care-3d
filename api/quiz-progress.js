@@ -56,8 +56,8 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { userId, correctAnswers, incorrectAnswers, percentageCompleted, completedQuestions, totalScore } = body;
-    
+    const { userId, email, displayName, correctAnswers, incorrectAnswers, percentageCompleted, completedQuestions, totalScore } = body;
+
     if (!userId) {
       return new Response(JSON.stringify({ error: 'userId es requerido' }), {
         status: 400,
@@ -67,9 +67,11 @@ export async function POST(request) {
 
     const db = await connectToDatabase();
     const collection = db.collection('quizProgress');
-    
+
     const quizData = {
       userId,
+      email: email || null,
+      displayName: displayName || null,
       correctAnswers: correctAnswers || 0,
       incorrectAnswers: incorrectAnswers || 0,
       percentageCompleted: percentageCompleted || 0,

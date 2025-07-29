@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header className="header-container">
       <div className="nav-section left-nav">
-        <NavLink to="/" className="nav-item">
+        <NavLink to="/home" className="nav-item">
           <FaHome className="nav-icon" />
           <span>Inicio</span>
         </NavLink>

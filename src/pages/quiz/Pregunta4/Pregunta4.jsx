@@ -35,7 +35,10 @@ const Pregunta4 = ({ onRespuesta }) => {
       puntaje = 0.5;
     else puntaje = 0;
 
-    onRespuesta(puntaje);
+    const respuestasTexto = seleccionadasInfo.map((op) => `${op.texto}`);
+    console.log("pregunta 4: ", puntaje)
+    onRespuesta(puntaje, { tipo: "interactiva", contenido: respuestasTexto });
+
   };
 
   return (

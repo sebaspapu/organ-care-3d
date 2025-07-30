@@ -45,7 +45,14 @@ const Pregunta3 = ({ onRespuesta }) => {
     });
 
     const puntuacion = correctas / 3;
-    onRespuesta(puntuacion);
+    console.log("pregunta 3: ", puntuacion)
+    const respuestasTexto = enfermedades.map((enf) => {
+    const sintoma = asignaciones[enf]?.texto || "Sin asignar";
+      return `${enf} - ${sintoma}`;
+    });
+
+    onRespuesta(puntuacion, { tipo: "interactiva", contenido: respuestasTexto });
+
   };
 
   return (

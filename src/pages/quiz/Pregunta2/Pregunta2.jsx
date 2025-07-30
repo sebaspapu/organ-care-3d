@@ -18,7 +18,9 @@ const Pregunta2 = ({ onRespuesta }) => {
   const manejarClick = () => {
     if (seleccion !== null) {
       const puntos = opciones[seleccion].esCorrecta ? 1 : 0;
-      onRespuesta(puntos);
+      console.log("pregunta 2: ", puntos);
+      onRespuesta(puntos, opciones[seleccion]);
+
     }
   };
 

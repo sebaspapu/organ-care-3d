@@ -42,7 +42,14 @@ const Pregunta1 = ({ onRespuesta }) => {
       if (respuestasCorrectas[from] === to) correctas++;
     });
     const puntuacion = correctas / enfermedades.length;
-    onRespuesta(puntuacion); // Enviar puntuación al padre
+    console.log("pregunta 1: ", puntuacion)
+    const respuestasTexto = conexiones.map(({ from, to }) => {
+    const enfermedad = enfermedades.find(e => e.id === from)?.nombre;
+    const definicion = definiciones.find(d => d.id === to)?.texto;
+    return `${enfermedad} - ${definicion}`;
+    });
+
+    onRespuesta(puntuacion, { tipo: "interactiva", contenido: respuestasTexto });
   };
 
   return (

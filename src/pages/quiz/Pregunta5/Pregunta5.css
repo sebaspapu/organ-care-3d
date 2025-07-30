@@ -1,0 +1,20 @@
+.pregunta5-container {
+  background: #fdfdfd;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.opcion-radio {
+  display: block;
+  margin: 10px 0;
+}
+
+.boton-siguiente {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #00a3d8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

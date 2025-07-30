@@ -279,6 +279,7 @@
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 2rem;
+    color: #00586f !important;
   }
   
   .quiz-icon-container {
@@ -436,7 +437,7 @@
     .quiz-title {
       font-size: 2rem;
     }
-    
+
     .quiz-background-shape {
       width: 200px;
       height: 200px;

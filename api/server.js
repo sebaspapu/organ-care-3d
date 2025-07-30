@@ -86,7 +86,16 @@ app.get('/api/quiz-leaderboard', async (req, res) => {
     const collection = db.collection('quizProgress');
     const leaderboard = await collection.find({}).sort({ totalScore: -1, percentageCompleted: -1 }).limit(10).toArray();
 
-    res.json({ success: true, leaderboard });
+    // Formatear: eliminar _id y agregar rank
+    const formattedLeaderboard = leaderboard.map((user, idx) => {
+      const { _id, ...rest } = user;
+      return {
+        ...rest,
+        rank: idx + 1
+      };
+    });
+
+    res.json({ success: true, leaderboard: formattedLeaderboard });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

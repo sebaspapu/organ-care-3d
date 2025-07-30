@@ -7,6 +7,8 @@ import Pregunta4 from "./Pregunta4/Pregunta4";
 import useQuizStore from "../../stores/use-quiz-store";
 import { useAuth } from "../../context/AuthContext";
 import Pregunta5 from "./Pregunta5/Pregunta5";
+import Leaderboard from "./Leaderboard";
+import { useNavigate } from "react-router-dom";
 
 const Quiz = () => {
   const { user } = useAuth();
@@ -14,6 +16,8 @@ const Quiz = () => {
   const [resultados, setResultados] = useState([]);
   const incrementQuizProgress = useQuizStore(state => state.incrementQuizProgress);
   const [respuestasUsuario, setRespuestasUsuario] = useState([]);
+  const [mostrarRanking, setMostrarRanking] = useState(false);
+  const navigate = useNavigate();
 
   const obtenerRespuestaCorrecta = (indice) => {
     const correctas = [
@@ -41,9 +45,16 @@ const Quiz = () => {
 
   const progreso = Math.round((resultados.length / 5) * 100);
 
+  if (mostrarRanking) {
+    return (
+      <div className="quiz-container">
+        <Leaderboard onVolver={() => navigate("/enfermedades")} />
+      </div>
+    );
+  }
+
   return (
     <div className="quiz-container">
-      
       <h1>Quiz de Enfermedades Oculares</h1>
       <span>Progreso del quiz: {progreso} %</span>
       <div className="barra-progreso">
@@ -102,7 +113,9 @@ const Quiz = () => {
             })}
           </div>
 
-          <button className="btn-terminar">Terminar</button>
+          <button className="btn-terminar" onClick={() => setMostrarRanking(true)}>
+            Ver Ranking
+          </button>
         </div>
       )}
 

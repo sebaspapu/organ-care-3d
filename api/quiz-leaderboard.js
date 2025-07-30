@@ -13,16 +13,14 @@ export async function GET(request) {
       .limit(10) // Top 10
       .toArray();
 
-    // Formatear datos para el frontend
-    const formattedLeaderboard = leaderboard.map((user, index) => ({
-      rank: index + 1,
-      userId: user.userId,
-      totalScore: user.totalScore || 0,
-      percentageCompleted: user.percentageCompleted || 0,
-      correctAnswers: user.correctAnswers || 0,
-      incorrectAnswers: user.incorrectAnswers || 0,
-      lastUpdated: user.lastUpdated
-    }));
+    // Formatear datos para el frontend, agregando rank y eliminando _id
+    const formattedLeaderboard = leaderboard.map((user, index) => {
+      const { _id, ...rest } = user;
+      return {
+        ...rest,
+        rank: index + 1
+      };
+    });
 
     return new Response(JSON.stringify({
       success: true,

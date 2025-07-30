@@ -8,8 +8,6 @@ import { Environment, Sparkles } from '@react-three/drei';
 import Eye from './models-3d/Eye';
 import LightEye from './lights/LightsEye';
 import FloorEye from "./floors/FloorEye";
-import VideoBackground from "./videos/VideoBackground";
-import EyeAudio from './sounds/EyeAudio';
 
 import SnellenTest from './models-3d/SnellenTest';
 import LightTest from './lights/LightsTest';
@@ -62,20 +60,13 @@ function Glaucoma() {
           </p>
         </div>
         
-        <div className="sintoma-card-glaucoma" style={{ position: 'relative', height: '400px' }} ref={snellenZoomRef} >
+        <div className="image-glaucoma-section">
           <Canvas shadows camera={{ position: [2, 2, 5], fov: 50 }} style={{ background: '#FFFFFF' }}>
-            <VideoBackground />
             <LightEye/>
             <OrbitControls />
             <Eye />
-            <EyeAudio />
             <FloorEye />
           </Canvas>
-          <div className="sintoma-nota-glaucoma">
-              <Canvas>
-                <Instructions title={"💡 ¡Haz click en la esfera rosa! 🔘"} />
-              </Canvas>
-          </div>
         </div>
         
         <div className="info-section efectos">
@@ -176,7 +167,7 @@ function Glaucoma() {
               </Canvas>
               <div className="tratamiento-nota-glaucoma">
                 <Canvas>
-                  <Instructions title={"💡 Haz doble clic en el modelo para interactuar. ¡Tecla i para ver información!"} />
+                  <Instructions title={"💡 Haz doble clic en el modelo para interactuar. Pulsa ℹ️ para ver información."} />
                 </Canvas>
               </div>
             </div>
@@ -204,10 +195,10 @@ function Glaucoma() {
 
             <div className="prevencion-card-glaucoma">
               <p className="prevencion-text-glaucoma">
-              Para prevenir el glaucoma, es muy importante cuidar lo que comemos. Una buena alimentación, 
-              con frutas, verduras y alimentos que tengan muchas vitaminas, ayuda a que nuestros ojos se 
-              mantengan sanos y fuertes. También es bueno hacer ejercicio, no frotarse los ojos con fuerza y 
-              visitar al médico de los ojos cada año. 
+              Cuando alguien tiene glaucoma, al principio no siente nada raro. Pero poco a poco empieza 
+              a ver menos por los lados, como si estuviera mirando por un tubo o una pajilla. A veces, si 
+              el glaucoma es muy fuerte, pueden doler los ojos, ver luces como arcoíris alrededor de los 
+              focos, o sentir el ojo rojo o pesado. Muchas veces no se nota hasta que ya ha avanzado bastante.
               </p>
             </div>
 
@@ -236,7 +227,7 @@ function Glaucoma() {
               </Canvas>
               <div className="prevencion-nota-glaucoma">
                 <Canvas>
-                  <Instructions title={"💡 Haz clic en el modelo para interactuar. ¡Presiona la barra espaciadora!"} />
+                  <Instructions title={"💡 Haz clic en el modelo para interactuar. Usa las teclas ← y → para opacarlo."} />
                 </Canvas>
               </div>
             </div>

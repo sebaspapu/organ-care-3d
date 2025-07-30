@@ -28,7 +28,7 @@ export default function EyeAudio() {
       {/* 🎧 Audio 3D */}
       <PositionalAudio
         ref={soundRef}
-        url="/sounds/Glaucoma/mystical.mp3"
+        url="/sounds/glaucoma/mystical.mp3"
         distance={10}
         loop
       />

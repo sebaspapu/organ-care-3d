@@ -16,7 +16,7 @@ const Medals = (props) => {
 
     return (
         <group {...props} dispose={null}>
-            <group scale={0.01}>
+            <group scale={6}>
                 <mesh
                     castShadow
                     receiveShadow

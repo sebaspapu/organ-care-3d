@@ -6,6 +6,13 @@
   margin-top: 30px;
 }
 
+.model-container {
+  flex: 1;
+  min-width: 200px;
+  max-width: 500px;
+  height: 700px;
+}
+
 .pregunta h2 {
   margin-bottom: 20px;
 }

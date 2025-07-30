@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./Quiz.css";
 import Medals from './models-3d/Medals';
 import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import Light from './lights/Lights';
 
 const Leaderboard = ({ onVolver }) => {
   const [ranking, setRanking] = useState([]);
@@ -178,28 +180,17 @@ const Leaderboard = ({ onVolver }) => {
         </tbody>
       </table>
 
-      <div style={{ width: '100%', height: '300px', marginTop: '40px' }}>
-        <Canvas shadows camera={{ position: [0, 0, 300], fov: 45 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight
-            position={[0, 10, 5]}
-            intensity={1}
-            castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            shadow-camera-far={500}
-            shadow-camera-left={-100}
-            shadow-camera-right={100}
-            shadow-camera-top={100}
-            shadow-camera-bottom={-100}
-          />
-          <Medals />
-          <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -50, 0]}>
-            <planeGeometry args={[500, 500]} />
-            <shadowMaterial opacity={0.3} />
-          </mesh>
-        </Canvas>
-      </div>
+      <div className="model-container">
+          <Canvas
+            shadows
+            camera={{ position: [2, 2, 5], fov: 50 }}
+            style={{ background: '#FFFFFF', borderRadius: '20px' }}
+          >
+            <Light />
+            <OrbitControls enableZoom={false} />
+            <Medals />
+          </Canvas>
+        </div>
 
       <button
         className="btn-volver"

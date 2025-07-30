@@ -13,7 +13,7 @@ const ControlsGlasses = ({ targetRef }) => {
   // Animación
   useFrame(() => {
     if (targetRef.current) {
-      targetRef.current.rotation.y += 0.005;
+      targetRef.current.rotation.y += 0.004;
     }
   });
 

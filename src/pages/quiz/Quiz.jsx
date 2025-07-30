@@ -4,11 +4,15 @@ import Pregunta1 from "./Pregunta1/Pregunta1";
 import Pregunta2 from "./Pregunta2/Pregunta2";
 import Pregunta3 from "./Pregunta3/Pregunta3";
 import Pregunta4 from "./Pregunta4/Pregunta4";
+import useQuizStore from "../../stores/use-quiz-store";
+import { useAuth } from "../../context/AuthContext";
 import Pregunta5 from "./Pregunta5/Pregunta5";
 
 const Quiz = () => {
+  const { user } = useAuth();
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [resultados, setResultados] = useState([]);
+  const incrementQuizProgress = useQuizStore(state => state.incrementQuizProgress);
   const [respuestasUsuario, setRespuestasUsuario] = useState([]);
 
   const obtenerRespuestaCorrecta = (indice) => {
@@ -23,8 +27,15 @@ const Quiz = () => {
   };
 
   const manejarRespuesta = (puntos, respuestaUsuario) => {
+    console.log('Respuesta del usuario:', puntos);
     setResultados([...resultados, puntos]);
     setRespuestasUsuario([...respuestasUsuario, respuestaUsuario]);
+    if (user && user.uid) {
+      incrementQuizProgress(user.uid, puntos, user.email, user.displayName);
+    } else {
+      // Si no hay usuario autenticado, puedes manejarlo como invitado o mostrar un error
+      incrementQuizProgress('invitado', puntos, null, null);
+    }
     setPreguntaActual((prev) => prev + 1);
   };
 

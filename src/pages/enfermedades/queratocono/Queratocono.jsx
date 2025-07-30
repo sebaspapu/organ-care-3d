@@ -20,6 +20,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Background from "./background/BackgroundGlasses";
 import PreventionVideo from "./videos/PreventionVideo";
+import HTML3DModelo from "./texts/HTML3DModelo";
 
 export default function Queratocono() {
   const [showTitle, setShowTitle] = useState(false);
@@ -227,6 +228,7 @@ export default function Queratocono() {
               <LightsOphthalmoscope />
               <OrbitControls />
               <StagingOphthalmoscope />
+              <HTML3DModelo title={"Este es un oftalmoscopio. ¡Pruébalo!"}  />
               <ControlsOphthalmoscope targetRef={ophthalmoscopeRef} />
 
               {/* Piso de la escena */}
